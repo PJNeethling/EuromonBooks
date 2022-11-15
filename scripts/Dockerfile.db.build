@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/mssql/server:2019-latest
+USER root
+
+ENV ACCEPT_EULA Y
+ENV SA_PASSWORD Passw0rd
+
+# copy from host to container
+COPY ./db-entrypoint.sh ./SqlCmdStartup.sh ./SqlCmdScript.sql ./
+
+RUN chmod +x ./SqlCmdStartup.sh
+
+CMD /bin/bash ./db-entrypoint.sh

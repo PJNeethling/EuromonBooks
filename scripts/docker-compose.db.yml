@@ -1,0 +1,27 @@
+version: '3.4'
+
+networks:
+  euromon-books-net:
+    external: true
+    name: core-shared
+
+services:
+  euromon-books-db:
+    image: euromon-books-db-sql
+    build:
+      context: .
+      dockerfile: Dockerfile.db.build
+    ports:
+      - 1433:1433
+    networks:
+      - euromon-books-net
+
+  euromon-books-db-flyway:
+    image: boxfuse/flyway
+    command: -url="jdbc:sqlserver://euromon-books-db;databaseName=EuromonBooks" -user=sa -password=Passw0rd -connectRetries=30 -baselineOnMigrate=true migrate
+    volumes:
+      - ../db:/flyway/sql
+    depends_on:
+      - euromon-books-db
+    networks:
+      - euromon-books-net

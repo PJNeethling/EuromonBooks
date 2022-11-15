@@ -1,0 +1,27 @@
+﻿BEGIN TRAN
+
+SET IDENTITY_INSERT Status ON
+
+MERGE Status AS tar
+USING (VALUES (1, 'Active'), 
+	(2, 'Pending'), 
+	(3, 'Inactive'))
+src (Id, Name) 
+on tar.Id = src.Id
+WHEN MATCHED THEN
+	UPDATE SET Name = src.Name
+WHEN NOT MATCHED THEN
+	INSERT (Id, Name)
+	VALUES (src.Id, src.Name)
+WHEN NOT MATCHED BY SOURCE THEN
+	DELETE;
+
+SET IDENTITY_INSERT Status OFF
+
+COMMIT
+GO
+
+DECLARE @maxId INT
+SELECT @maxId = ISNULL(MAX(Id), 1) FROM Status
+DBCC CHECKIDENT ('dbo.Status', RESEED, @maxId) WITH NO_INFOMSGS
+GO

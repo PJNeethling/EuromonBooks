@@ -1,0 +1,22 @@
+version: '3.4'
+
+networks:
+  euromon-books-net:
+    external:
+      name: core-shared
+
+services:
+ pj-example-api:
+    image: euromon-books-api
+    ports:
+      - 9998:80
+      - 9999:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT_NAME}
+      - ASPNETCORE_URLS=http://+:80
+    volumes:
+      - /var/log/euromonbooks:/var/log:rw
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    restart: always
+    networks:
+      - euromon-books-net
