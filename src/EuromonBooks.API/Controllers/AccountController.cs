@@ -119,6 +119,28 @@ namespace EuromonBooks.API.Controllers
         }
 
         /// <summary>
+        /// Register a user.
+        /// </summary>
+        /// <param name="request">User details</param>
+        /// <returns>Ok</returns>
+        [SwaggerOperation(Tags = new[] { "Authentication" })]
+        [Route(RouteHelper.RegisterUser)]
+        [HttpPost]
+        public async Task<UuidResponse> RegisterUser(RegisterUserRequest request)
+        {
+            var input = new UserModel
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                UserName = request.Username,
+                Number = request.Number,
+                Password = request.Password,
+            };
+            return await _accountService.RegisterUser(input);
+        }
+
+        /// <summary>
         /// Get all roles.
         /// </summary>
         /// <returns>Roles</returns>

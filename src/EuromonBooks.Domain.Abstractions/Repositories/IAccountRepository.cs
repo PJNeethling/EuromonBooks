@@ -19,5 +19,7 @@ namespace EuromonBooks.Abstractions.Repositories
         Task<Role> GetRoleDetails(int id);
 
         Task<IdResponse> UpsertRole(Role request);
+
+        Task<UuidResponse> RegisterUser(UserModel userDetails);
     }
 }

@@ -93,7 +93,7 @@ void UseMiddleware(IApplicationBuilder app)
 {
     app.UseMiddleware<ExceptionMiddleware>();
 
-    app.UseWhen(context => !context.Request.Path.Value.Contains("/login"), builder =>
+    app.UseWhen(context => !context.Request.Path.Value.Contains("/login") & !context.Request.Path.Value.Contains("/register"), builder =>
     {
         builder.UseMiddleware<BaseHeadersMiddleware>();
     });

@@ -78,5 +78,56 @@ namespace EuromonBooks.Database.Abstractions
 
             await Database.ExecuteSqlRawAsync($"EXEC AssignRolesToUser {DataAccessHelpers.GetParameterNames(parameters)}", parameters);
         }
+
+        public async Task<UuidQuery> RegisterUser(UserParams userParams)
+        {
+            var parameters = new[]
+            {
+                new SqlParameter("@UserName", userParams.UserName),
+                new SqlParameter("@FirstName", userParams.FirstName),
+                new SqlParameter("@LastName", userParams.LastName),
+                new SqlParameter("@Email", userParams.Email ?? (object)DBNull.Value),
+                new SqlParameter("@Number", userParams.Number ?? (object)DBNull.Value),
+                new SqlParameter("@Password", userParams.Password ?? (object)DBNull.Value),
+                new SqlParameter("@Passphrase", userParams.PassPhrase),
+            };
+
+            return (await UuidQueries.FromSqlRaw($"EXEC RegisterUser {DataAccessHelpers.GetParameterNames(parameters)}", parameters)
+                .ToListAsync()).FirstOrDefault();
+        }
+
+        public async Task<List<BooksQuery>> GetAllBooks()
+        {
+            var parameters = Array.Empty<object>();
+
+            return (await GetAllBooksQueries.FromSqlRaw($"EXEC GetAllBooks", parameters)
+                .ToListAsync());
+        }
+
+        public async Task<List<BooksQuery>> GetAllBooksForUser(string userUid)
+        {
+            var parameters = new[]
+            {
+                new SqlParameter("@Uuid", userUid)
+            };
+
+            return (await GetAllBooksQueries.FromSqlRaw($"EXEC GetAllBooksForUser {DataAccessHelpers.GetParameterNames(parameters)}", parameters)
+                .ToListAsync());
+        }
+
+        public async Task AssignBooksToUser(Guid uUid, IdList bookIds)
+        {
+            var parameters = new[]
+            {
+                new SqlParameter("@Uuid", uUid),
+                new SqlParameter("@BookIds", SqlDbType.Structured)
+                {
+                    TypeName = "dbo.IdListType",
+                    Value = DataAccessHelpers.GetIdListSqlDataRecords(bookIds.Ids)
+                }
+            };
+
+            await Database.ExecuteSqlRawAsync($"EXEC AssignBooksToUser {DataAccessHelpers.GetParameterNames(parameters)}", parameters);
+        }
     }
 }

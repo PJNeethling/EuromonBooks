@@ -15,7 +15,8 @@ namespace EuromonBooks.Domain
 
             return services.AddScoped<IJwtService, JwtService>()
                 .AddScoped<ILoginService, LoginService>()
-                .AddScoped<IAccountService, AccountService>();
+                .AddScoped<IAccountService, AccountService>()
+                .AddScoped<IBookService, BookService>();
         }
 
         private static Action<JwtOptions> ConfigureJwtAuthenticationServicesAndOptions(this IServiceCollection services, IConfiguration configuration)

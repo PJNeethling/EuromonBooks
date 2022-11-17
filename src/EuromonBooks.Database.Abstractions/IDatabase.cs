@@ -24,5 +24,13 @@ namespace EuromonBooks.Database.Abstractions
         Task<UuidQuery> UpsertUser(UserParams userParams);
 
         Task AssignRolesToUser(Guid uUid, IdList roleIds);
+
+        Task<List<BooksQuery>> GetAllBooks();
+
+        Task<List<BooksQuery>> GetAllBooksForUser(string userUid);
+
+        Task AssignBooksToUser(Guid uUid, IdList bookIds);
+
+        Task<UuidQuery> RegisterUser(UserParams userParams);
     }
 }

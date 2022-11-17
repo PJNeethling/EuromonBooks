@@ -16,13 +16,13 @@ BEGIN
 	CREATE TABLE [dbo].[User](
 		[Id] [int] IDENTITY(1,1) NOT NULL,
 		[Uuid] [uniqueidentifier] NOT NULL,
-		[UserName] [nvarchar](50) NULL,
+		[UserName] [nvarchar](50) NOT NULL,
 		[Password] [nvarchar](255) NOT NULL,
 		[FirstName] [nvarchar](100) NULL,
 		[LastName] [nvarchar](100) NULL,
 		[CreatedDate] [datetime] NOT NULL,
 		[ModifiedDate] [datetime] NULL,
-		[Email] [nvarchar](100) NOT NULL,
+		[Email] [nvarchar](100) NULL,
 		[Number] [nvarchar](20) NULL,
 		[StatusId] [int] NOT NULL
 	 CONSTRAINT [PK_Persona] PRIMARY KEY CLUSTERED 

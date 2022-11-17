@@ -37,8 +37,8 @@ BEGIN TRAN
 SET IDENTITY_INSERT [Role] ON
 
 MERGE [Role] AS tar
-USING (VALUES	(1, 'Admin', 1, 'Admin role which gives access to most features within the system for Example system.'),
-				(2, 'Default Guest', 1, 'Default Guest role within the Example system.')
+USING (VALUES	(1, 'Admin', 1, 'Admin role which gives access to most features within the system for EuromonBook system.'),
+				(2, 'Default User', 1, 'Default User role within the EuromonBook system.')
 	) src (Id, Name, IsActive, Description)
 	ON tar.Id = src.Id
 WHEN MATCHED THEN
@@ -73,7 +73,7 @@ DECLARE @UR TABLE
 INSERT INTO @UR
 SELECT 1, Id FROM [Role]
 UNION
-SELECT 2, Id FROM [Role] WHERE Name = 'Guest'
+SELECT 2, Id FROM [Role] WHERE Name = 'Default User'
 
 
 MERGE UserRole AS tar

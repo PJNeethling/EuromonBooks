@@ -144,6 +144,34 @@ namespace EuromonBooks.Repository
             }
         }
 
+        public async Task<UuidResponse> RegisterUser(UserModel userDetails)
+        {
+            //implement automapper
+            var parameters = new UserParams
+            {
+                FirstName = userDetails.FirstName,
+                LastName = userDetails.LastName,
+                Email = userDetails.Email,
+                UserName = userDetails.UserName,
+                Number = userDetails.Number
+            };
+            parameters.PassPhrase = _options.Passphrase;
+
+            var password = string.IsNullOrEmpty(userDetails.Password) ? Guid.NewGuid().ToString() : userDetails.Password;
+            parameters.Password = _password.HashPassword(password);
+
+            try
+            {
+                var result = await _database.RegisterUser(parameters);
+
+                return new UuidResponse { Uuid = result.Uuid };
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
         public async Task<List<Role>> GetAllRoles()
         {
             try

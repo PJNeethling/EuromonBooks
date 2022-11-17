@@ -44,6 +44,14 @@ namespace EuromonBooks.Domain
             await _repo.AssignRolesToUser(uUid, roleIds);
         }
 
+        public async Task<UuidResponse> RegisterUser(UserModel userDetails)
+        {
+            //add validation
+            //check if we can parse uuid as guid
+            var userResponse = await _repo.RegisterUser(userDetails);
+            return userResponse;
+        }
+
         public async Task<List<Role>> GetAllRoles()
         {
             var roles = await _repo.GetAllRoles();

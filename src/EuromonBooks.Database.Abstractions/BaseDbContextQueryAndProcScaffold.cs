@@ -9,6 +9,7 @@ namespace EuromonBooks.Database.Abstractions
         public virtual DbSet<UsersQuery> GetAllUsersQueries { get; set; }
         public virtual DbSet<UsersDetailsQuery> GetUserDetailsQueries { get; set; }
         public virtual DbSet<UuidQuery> UuidQueries { get; set; }
+        public virtual DbSet<BooksQuery> GetAllBooksQueries { get; set; }
 
         protected static void StoredProcModelCreating(ModelBuilder modelBuilder)
         {
@@ -16,6 +17,7 @@ namespace EuromonBooks.Database.Abstractions
             modelBuilder.Entity<UsersQuery>(entity => entity.HasNoKey());
             modelBuilder.Entity<UsersDetailsQuery>(entity => entity.HasNoKey());
             modelBuilder.Entity<UuidQuery>(entity => entity.HasNoKey());
+            modelBuilder.Entity<BooksQuery>(entity => entity.HasNoKey());
         }
     }
 }

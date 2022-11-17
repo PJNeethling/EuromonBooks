@@ -13,7 +13,8 @@ namespace EuromonBooks.Repository
             return services.Configure(ConfigureEncryptionOptions(configuration))
                 .AddScoped<ILoginRepository, LoginRepository>()
                 .AddScoped<IPassword, Password>()
-                .AddScoped<IAccountRepository, AccountRepository>();
+                .AddScoped<IAccountRepository, AccountRepository>()
+                .AddScoped<IBookRepository, BookRepository>();
         }
 
         private static Action<EncryptionOptions> ConfigureEncryptionOptions(IConfiguration configuration)
