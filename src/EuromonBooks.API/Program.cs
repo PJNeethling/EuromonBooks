@@ -28,6 +28,12 @@ AddSwagger(builder.Services);
 var app = builder.Build();
 var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
+//prettify this
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 UseSwagger(app, provider);
 UseMiddleware(app);
 

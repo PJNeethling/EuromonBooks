@@ -133,7 +133,7 @@ namespace EuromonBooks.API.Controllers
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
-                UserName = request.Username,
+                UserName = request.UserName,
                 Number = request.Number,
                 Password = request.Password,
             };
