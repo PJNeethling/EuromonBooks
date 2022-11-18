@@ -1,0 +1,79 @@
+﻿using EuromonBooks.Abstractions.Models;
+using EuromonBooks.Abstractions.Repositories;
+using EuromonBooks.Domain.Abstractions.Models;
+using EuromonBooks.Domain.Abstractions.Models.Account;
+using EuromonBooks.Domain.Abstractions.Services;
+using EuromonBooks.Domain.Abstractions.Validators;
+using EuromonBooks.Domain.Validators;
+
+namespace EuromonBooks.Domain
+{
+    public class AccountService : IAccountService
+    {
+        private readonly IAccountRepository _repo;
+        private readonly IEuromonBooksValidator _validator;
+
+        public AccountService(IEuromonBooksValidator validator, IAccountRepository repo)
+        {
+            _validator = validator;
+            _repo = repo;
+        }
+
+        public async Task<AllUsers> GetAllUsers(int? statusId)
+        {
+            //add nullableIdvalidator
+            var users = await _repo.GetAllUsers(statusId);
+            return users;
+        }
+
+        public async Task<UserDetails> GetUserDetails(string uUid)
+        {
+            //add validator (trying to parse into guid)
+            var userDetails = await _repo.GetUserDetails(uUid);
+            return userDetails;
+        }
+
+        public async Task<UuidResponse> UpsertUser(UserModel userDetails, string uUid = null)
+        {
+            //add validation
+            //check if we can parse uuid as guid
+            var userResponse = await _repo.UpsertUser(userDetails, uUid);
+            return userResponse;
+        }
+
+        public async Task AssignRolesToUser(string uUid, IdList roleIds)
+        {
+            //add validation to check if id can parse as guid
+            //add validation to check id list
+            await _repo.AssignRolesToUser(uUid, roleIds);
+        }
+
+        public async Task<UuidResponse> RegisterUser(UserModel userDetails)
+        {
+            await _validator.ValidateAsync<RegisterUserValidator>(userDetails);
+
+            var userResponse = await _repo.RegisterUser(userDetails);
+            return userResponse;
+        }
+
+        public async Task<List<Role>> GetAllRoles()
+        {
+            var roles = await _repo.GetAllRoles();
+            return roles;
+        }
+
+        public async Task<Role> GetRoleDetails(int id)
+        {
+            //add id validator
+            var roleDetails = await _repo.GetRoleDetails(id);
+            return roleDetails;
+        }
+
+        public async Task<IdResponse> UpsertRole(Role request)
+        {
+            //add request validator
+            var roleId = await _repo.UpsertRole(request);
+            return roleId;
+        }
+    }
+}
