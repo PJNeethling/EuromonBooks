@@ -3,15 +3,19 @@ using EuromonBooks.Abstractions.Repositories;
 using EuromonBooks.Domain.Abstractions.Models;
 using EuromonBooks.Domain.Abstractions.Models.Account;
 using EuromonBooks.Domain.Abstractions.Services;
+using EuromonBooks.Domain.Abstractions.Validators;
+using EuromonBooks.Domain.Validators;
 
 namespace EuromonBooks.Domain
 {
     public class AccountService : IAccountService
     {
         private readonly IAccountRepository _repo;
+        private readonly IEuromonBooksValidator _validator;
 
-        public AccountService(IAccountRepository repo)
+        public AccountService(IEuromonBooksValidator validator, IAccountRepository repo)
         {
+            _validator = validator;
             _repo = repo;
         }
 
@@ -46,8 +50,8 @@ namespace EuromonBooks.Domain
 
         public async Task<UuidResponse> RegisterUser(UserModel userDetails)
         {
-            //add validation
-            //check if we can parse uuid as guid
+            await _validator.ValidateAsync<RegisterUserValidator>(userDetails);
+
             var userResponse = await _repo.RegisterUser(userDetails);
             return userResponse;
         }
