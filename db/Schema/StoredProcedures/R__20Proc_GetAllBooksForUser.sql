@@ -22,7 +22,8 @@ BEGIN
 			b.CreatedDate,
 			b.ModifiedDate
 		FROM [Book] b
-		INNER JOIN UserBook ub ON b.Id = ub.UserId
+		INNER JOIN UserBook ub ON b.Id = ub.BookId
+		WHERE ub.UserId = @UserId
 	)
 
 	SELECT *

@@ -87,3 +87,38 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 COMMIT
 GO
+
+BEGIN TRAN
+
+SET IDENTITY_INSERT [Book] ON
+
+MERGE [Book] AS tar
+USING (VALUES	(1, 'Novel Crumbs', 'Novel Crumbs Description', 'I will eat bread', CAST(44.21 AS DECIMAL(5, 2)), 1),
+				(2, 'Author Nerds', 'Author Nerds Description', 'Write my name', CAST(100.00 AS DECIMAL(5, 2)), 1),
+				(3, 'Escape the Commander', 'Escape the Commander Description', 'Run forest', CAST(12.23 AS DECIMAL(5, 2)), 1),
+				(4, 'Cuddle Reading', 'Cuddle Reading Description', 'Wroem wroem racing', CAST(124.20 AS DECIMAL(5, 2)), 1),
+				(5, 'Robot of Destruction', 'Robot of Destruction Description', 'Beep Boob', CAST(77.77 AS DECIMAL(5, 2)), 1),
+				(6, 'Terminal Paperback', 'Terminal Paperback Description', 'I am the terminator', CAST(10.00 AS DECIMAL(5, 2)), 1)
+	) src (Id, [Name], [Description], [Text], PurchasePrice, IsActive)
+	ON tar.Id = src.Id
+WHEN MATCHED THEN
+	UPDATE SET
+		[Name] = src.[Name],
+		[Description] = src.[Description],
+		[Text] = src.[Text],
+		PurchasePrice = src.PurchasePrice,
+		IsActive = src.IsActive,
+		ModifiedDate = GETUTCDATE()
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT (Id, [Name], [Description], [Text], PurchasePrice, IsActive)
+	VALUES (src.Id, src.[Name], src.[Description], src.[Text], src.PurchasePrice, src.IsActive);
+
+SET IDENTITY_INSERT [Book] OFF
+
+COMMIT
+GO
+
+DECLARE @maxId INT
+SELECT @maxId = ISNULL(MAX(Id), 1) FROM [Book]
+DBCC CHECKIDENT ('dbo.Book', RESEED, @maxId) WITH NO_INFOMSGS
+GO
