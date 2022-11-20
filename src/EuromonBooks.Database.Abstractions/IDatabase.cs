@@ -32,5 +32,9 @@ namespace EuromonBooks.Database.Abstractions
         Task AssignBooksToUser(Guid uUid, IdList bookIds);
 
         Task<UuidQuery> RegisterUser(UserParams userParams);
+
+        Task PurchaseUserBook(Guid uUid, int bookId);
+
+        Task DeleteUserBook(Guid uUid, int bookId);
     }
 }

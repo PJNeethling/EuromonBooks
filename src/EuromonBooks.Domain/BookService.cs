@@ -39,5 +39,21 @@ namespace EuromonBooks.Domain
 
             await _repo.AssignBooksToUser(uUid, bookIds);
         }
+
+        public async Task PurchaseUserBook(string uUid, int bookId)
+        {
+            await _validator.ValidateAsync<UserUuidValidator>(uUid);
+            await _validator.ValidateAsync<IdValidator>(bookId);
+
+            await _repo.PurchaseUserBook(uUid, bookId);
+        }
+
+        public async Task DeleteUserBook(string uUid, int bookId)
+        {
+            await _validator.ValidateAsync<UserUuidValidator>(uUid);
+            await _validator.ValidateAsync<IdValidator>(bookId);
+
+            await _repo.DeleteUserBook(uUid, bookId);
+        }
     }
 }

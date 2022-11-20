@@ -101,5 +101,31 @@ namespace EuromonBooks.Repository
                 throw HandleSqlException(ex);
             }
         }
+
+        public async Task PurchaseUserBook(string uUid, int bookId)
+        {
+            //implement automapper
+            try
+            {
+                await _database.PurchaseUserBook(Guid.Parse(uUid), bookId);
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
+        public async Task DeleteUserBook(string uUid, int bookId)
+        {
+            //implement automapper
+            try
+            {
+                await _database.DeleteUserBook(Guid.Parse(uUid), bookId);
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
     }
 }
