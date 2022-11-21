@@ -129,5 +129,27 @@ namespace EuromonBooks.Database.Abstractions
 
             await Database.ExecuteSqlRawAsync($"EXEC AssignBooksToUser {DataAccessHelpers.GetParameterNames(parameters)}", parameters);
         }
+
+        public async Task PurchaseUserBook(Guid uUid, int bookId)
+        {
+            var parameters = new[]
+            {
+                new SqlParameter("@Uuid", uUid),
+                new SqlParameter("@BookId", bookId),
+            };
+
+            await Database.ExecuteSqlRawAsync($"EXEC PurchaseUserBook {DataAccessHelpers.GetParameterNames(parameters)}", parameters);
+        }
+
+        public async Task DeleteUserBook(Guid uUid, int bookId)
+        {
+            var parameters = new[]
+            {
+                new SqlParameter("@Uuid", uUid),
+                new SqlParameter("@BookId", bookId),
+            };
+
+            await Database.ExecuteSqlRawAsync($"EXEC DeleteUserBook {DataAccessHelpers.GetParameterNames(parameters)}", parameters);
+        }
     }
 }

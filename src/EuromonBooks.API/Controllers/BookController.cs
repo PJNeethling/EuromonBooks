@@ -56,12 +56,46 @@ namespace EuromonBooks.API.Controllers
         /// <param name="bookIds">Book Id's to assign</param>
         /// <returns>Ok</returns>
         [SwaggerOperation(Tags = new[] { "UserBookAssignment" })]
-        [AllowedAccessAttribute("2")]
+        [AllowedAccessAttribute("1")]
         [HttpPut]
         [Route(RouteHelper.AssignUserBooks)]
         public async Task<ActionResult> AssignBooksToUser(string id, IdList bookIds)
         {
             await _bookService.AssignBooksToUser(id, bookIds);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Purchase book.
+        /// </summary>
+        /// <param name="id">User identification id</param>
+        /// <param name="bookId">Book Id's to purchase</param>
+        /// <returns>Ok</returns>
+        [SwaggerOperation(Tags = new[] { "UserBookAssignment" })]
+        [AllowedAccessAttribute("2")]
+        [HttpPost]
+        [Route(RouteHelper.UserBook)]
+        public async Task<ActionResult> PurchaseUserBook(string id, int bookId)
+        {
+            await _bookService.PurchaseUserBook(id, bookId);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Delete a user's book.
+        /// </summary>
+        /// <param name="id">User identification id</param>
+        /// <param name="bookId">Book Id's to delete</param>
+        /// <returns>Ok</returns>
+        [SwaggerOperation(Tags = new[] { "UserBookAssignment" })]
+        [AllowedAccessAttribute("2")]
+        [HttpDelete]
+        [Route(RouteHelper.UserBook)]
+        public async Task<ActionResult> DeleteUserBook(string id, int bookId)
+        {
+            await _bookService.DeleteUserBook(id, bookId);
 
             return Ok();
         }

@@ -26,33 +26,38 @@ namespace EuromonBooks.Repository
             try
             {
                 var books = await _database.GetAllBooks();
-
-                var result = new AllBooks { Books = new List<BookWithDates>() };
-
-                if (books[0].Id != null)
-                {
-                    //add mapper
-                    foreach (var book in books)
-                    {
-                        result.Books.Add(new BookWithDates
-                        {
-                            Id = book.Id,
-                            Name = book.Name,
-                            Description = book.Description,
-                            Text = book.Text,
-                            IsActive = book.IsActive,
-                            CreatedDate = book.CreatedDate,
-                            ModifiedDate = book.ModifiedDate
-                        });
-                    }
-                }
-                result.TotalItems = books[0].TotalItems;
-                return result;
+                return MapsBooks(books);
             }
             catch (SqlException ex)
             {
                 throw HandleSqlException(ex);
             }
+        }
+
+        private static AllBooks MapsBooks(List<Database.Abstractions.Queries.BooksQuery> books)
+        {
+            var result = new AllBooks { Books = new List<BookWithDates>() };
+
+            if (books[0].Id != null)
+            {
+                //add auto mapper to map the results
+                foreach (var book in books)
+                {
+                    result.Books.Add(new BookWithDates
+                    {
+                        Id = book.Id,
+                        Name = book.Name,
+                        Description = book.Description,
+                        Text = book.Text,
+                        PurchasePrice = book.PurchasePrice,
+                        IsActive = book.IsActive,
+                        CreatedDate = book.CreatedDate,
+                        ModifiedDate = book.ModifiedDate
+                    });
+                }
+            }
+            result.TotalItems = books[0].TotalItems;
+            return result;
         }
 
         public async Task<AllBooks> GetAllBooksForUser(string userUid)
@@ -61,27 +66,7 @@ namespace EuromonBooks.Repository
             {
                 var books = await _database.GetAllBooksForUser(userUid);
 
-                var result = new AllBooks { Books = new List<BookWithDates>() };
-
-                if (books[0].Id != null)
-                {
-                    //add mapper
-                    foreach (var book in books)
-                    {
-                        result.Books.Add(new BookWithDates
-                        {
-                            Id = book.Id,
-                            Name = book.Name,
-                            Description = book.Description,
-                            Text = book.Text,
-                            IsActive = book.IsActive,
-                            CreatedDate = book.CreatedDate,
-                            ModifiedDate = book.ModifiedDate
-                        });
-                    }
-                }
-                result.TotalItems = books[0].TotalItems;
-                return result;
+                return MapsBooks(books);
             }
             catch (SqlException ex)
             {
@@ -91,10 +76,33 @@ namespace EuromonBooks.Repository
 
         public async Task AssignBooksToUser(string uUid, IdList bookIds)
         {
-            //implement automapper
             try
             {
                 await _database.AssignBooksToUser(Guid.Parse(uUid), bookIds);
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
+        public async Task PurchaseUserBook(string uUid, int bookId)
+        {
+            try
+            {
+                await _database.PurchaseUserBook(Guid.Parse(uUid), bookId);
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
+        public async Task DeleteUserBook(string uUid, int bookId)
+        {
+            try
+            {
+                await _database.DeleteUserBook(Guid.Parse(uUid), bookId);
             }
             catch (SqlException ex)
             {

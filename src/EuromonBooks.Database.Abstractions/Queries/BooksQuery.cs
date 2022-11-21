@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string Text { get; set; }
+        public decimal PurchasePrice { get; set; }
         public bool? IsActive { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }

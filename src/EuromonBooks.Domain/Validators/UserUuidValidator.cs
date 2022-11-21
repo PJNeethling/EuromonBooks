@@ -8,8 +8,6 @@ namespace EuromonBooks.Domain.Validators
         {
             RuleFor(x => x)
                 .NotEmpty().WithMessage(ValidationMessages.IsRequired);
-
-            //Validate taht this can be parsed as a GUID
         }
     }
 }

@@ -8,12 +8,11 @@
         public const string User = "user/{id}";
         public const string RegisterUser = "user/register";
         public const string AssignUserRoles = "user/{id}/roles";
-
         public const string Roles = "roles";
         public const string Role = "role/{id}";
-
         public const string Books = "books";
         public const string AssignUserBooks = "user/{id}/books";
         public const string UserBooks = "user/{id}/books";
+        public const string UserBook = "user/{id}/book/{bookId}";
     }
 }

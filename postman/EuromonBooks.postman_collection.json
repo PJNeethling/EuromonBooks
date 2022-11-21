@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "7fac2cd2-cb06-44b2-8640-4019c80f7e4a",
+		"name": "EuromonBooks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16941750"
+	},
+	"item": [
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"pjneethling\",\r\n  \"password\": \"P@55w0rd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9998/api/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9998",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Books",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"pjneethlingg\",\r\n  \"password\": \"P@55w0rd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9998/api/v1/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9998",
+					"path": [
+						"api",
+						"v1",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users Books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiNWEwNTJkNWMtNTZmZi00MTRkLWE5MjAtMWI1MjM2ZjY5ZjVlIiwiUm9sZXMiOiIxLDIiLCJleHAiOjE2Njg3OTA5ODAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTk5OC8iLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0Ojk5OTgvIn0.bwMo6j7ZceQ-jJHpJID2CyarasOqj3Z1ISSQ8jk5VcA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9998/api/v1/user/5a052d5c-56ff-414d-a920-1b5236f69f5e/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9998",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"5a052d5c-56ff-414d-a920-1b5236f69f5e",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Books to User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiNWEwNTJkNWMtNTZmZi00MTRkLWE5MjAtMWI1MjM2ZjY5ZjVlIiwiUm9sZXMiOiIxLDIiLCJleHAiOjE2Njg3OTA5ODAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTk5OC8iLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0Ojk5OTgvIn0.bwMo6j7ZceQ-jJHpJID2CyarasOqj3Z1ISSQ8jk5VcA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ids\": [\r\n    1,2,3\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9998/api/v1/user/5a052d5c-56ff-414d-a920-1b5236f69f5e/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9998",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"5a052d5c-56ff-414d-a920-1b5236f69f5e",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n//   \"userName\": \"string\",\r\n//   \"email\": \"string\",\r\n//   \"firstName\": \"string\",\r\n//   \"lastName\": \"string\",\r\n//   \"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9998/api/v1/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9998",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiNmEyZjA4YTMtN2I4Ni00YzFjLTlhOWMtNDVlMjU4ZmE5OWI3IiwiUm9sZXMiOiIxLDIiLCJleHAiOjE2NjExMTE4ODcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTk5OC8iLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0Ojk5OTgvIn0.gSHDKaZ2JnT44GOwwsXlEuDZpA_wrnGiWsiDJVeR8r8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9998/api/User/Admins",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9998",
+					"path": [
+						"api",
+						"User",
+						"Admins"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

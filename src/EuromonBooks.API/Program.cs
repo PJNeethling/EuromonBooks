@@ -28,12 +28,7 @@ AddSwagger(builder.Services);
 var app = builder.Build();
 var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-//prettify this
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
-
+UseCors(app);
 UseSwagger(app, provider);
 UseMiddleware(app);
 
@@ -65,7 +60,6 @@ void AddVersioning(IServiceCollection services)
 void AddMvc(IServiceCollection services)
 {
     var mvcBuilder = services.AddMvc();
-    //.AddFluentValidation();
     AddJsonOptions(mvcBuilder);
     services.AddHttpContextAccessor();
     services.AddRouting(opt => opt.LowercaseUrls = true);
@@ -103,6 +97,13 @@ void UseMiddleware(IApplicationBuilder app)
     {
         builder.UseMiddleware<BaseHeadersMiddleware>();
     });
+}
+void UseCors(IApplicationBuilder app)
+{
+    app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 }
 
 void AddSwagger(IServiceCollection services)

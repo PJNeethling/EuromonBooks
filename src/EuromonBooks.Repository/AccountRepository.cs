@@ -37,7 +37,7 @@ namespace EuromonBooks.Repository
 
                 if (users[0].Uuid != null)
                 {
-                    //add mapper
+                    //add auto mapper to map the results
                     foreach (var user in users)
                     {
                         result.Users.Add(new UserWithDates
@@ -67,7 +67,7 @@ namespace EuromonBooks.Repository
             {
                 var userDetails = await _database.GetUserDetails(uUid, _options.Passphrase);
 
-                //add mapper
+                //add auto mapper to map the results
                 var result = new UserDetails
                 {
                     FirstName = userDetails.FirstName,
@@ -93,7 +93,7 @@ namespace EuromonBooks.Repository
 
         public async Task<UuidResponse> UpsertUser(UserModel userDetails, string uUid = null)
         {
-            //implement automapper
+            //add auto mapper to map the request parameters
             var parameters = new UserParams
             {
                 Uuid = uUid != null ? Guid.Parse(uUid) : null,
@@ -133,7 +133,6 @@ namespace EuromonBooks.Repository
 
         public async Task AssignRolesToUser(string uUid, IdList roleIds)
         {
-            //implement automapper
             try
             {
                 await _database.AssignRolesToUser(Guid.Parse(uUid), roleIds);
@@ -146,7 +145,7 @@ namespace EuromonBooks.Repository
 
         public async Task<UuidResponse> RegisterUser(UserModel userDetails)
         {
-            //implement automapper
+            //add auto mapper to map the request parameters
             var parameters = new UserParams
             {
                 FirstName = userDetails.FirstName,
@@ -182,7 +181,7 @@ namespace EuromonBooks.Repository
 
                 if (roles[0].Id != null)
                 {
-                    //add mapper
+                    //add auto mapper to map the results
                     foreach (var role in roles)
                     {
                         result.Add(new Role
@@ -210,7 +209,7 @@ namespace EuromonBooks.Repository
 
                 if (roleDetails.Id != 0)
                 {
-                    //add mapper
+                    //add auto mapper to map the results
                     result.Id = roleDetails.Id.Value;
                     result.Name = roleDetails.Name;
                     result.Description = roleDetails.Description;
@@ -230,8 +229,6 @@ namespace EuromonBooks.Repository
         {
             try
             {
-                //use mapper for the below
-
                 var result = new Role();
                 if (request.Id != 0)
                 {
