@@ -39,17 +39,18 @@
 		{
 			"name": "Get All Books",
 			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"pjneethlingg\",\r\n  \"password\": \"P@55w0rd\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVdWlkIjoiNWEwNTJkNWMtNTZmZi00MTRkLWE5MjAtMWI1MjM2ZjY5ZjVlIiwiUm9sZXMiOiIxLDIiLCJleHAiOjE2NjkwMzIxNzYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTk5OC8iLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0Ojk5OTgvIn0.8iy5vFjUBegZBtT5v3rfLV-W6AiUWT8kD-HmtM2umLw",
+							"type": "string"
 						}
-					}
+					]
 				},
+				"method": "GET",
+				"header": [],
 				"url": {
 					"raw": "http://localhost:9998/api/v1/books",
 					"protocol": "http",
