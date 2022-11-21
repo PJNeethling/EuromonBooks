@@ -49,6 +49,7 @@ namespace EuromonBooks.Repository
                         Name = book.Name,
                         Description = book.Description,
                         Text = book.Text,
+                        PurchasePrice = book.PurchasePrice,
                         IsActive = book.IsActive,
                         CreatedDate = book.CreatedDate,
                         ModifiedDate = book.ModifiedDate

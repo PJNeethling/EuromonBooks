@@ -44,7 +44,7 @@ namespace EuromonBooks.Domain
         public async Task AssignRolesToUser(string uUid, IdList roleIds)
         {
             await _validator.ValidateAsync<UserUuidValidator>(uUid);
-            await _validator.ValidateAsync<IdsValidator>(roleIds);
+            await _validator.ValidateAsync<IdsValidator>(roleIds.Ids);
 
             await _repo.AssignRolesToUser(uUid, roleIds);
         }
