@@ -4,6 +4,7 @@ using EuromonBooks.API.Models.Request;
 using EuromonBooks.Domain.Abstractions.Models;
 using EuromonBooks.Domain.Abstractions.Models.Account;
 using EuromonBooks.Domain.Abstractions.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -42,7 +43,7 @@ namespace EuromonBooks.API.Controllers
         /// <param name="id">User identification id</param>
         /// <returns></returns>
         [SwaggerOperation(Tags = new[] { "User" })]
-        [AllowedAccessAttribute("1")]
+        [AllowedAccessAttribute("2")]
         [Route(RouteHelper.User)]
         [HttpGet]
         public async Task<UserDetails> GetUserDetails(string id)
@@ -125,6 +126,7 @@ namespace EuromonBooks.API.Controllers
         /// <returns>Ok</returns>
         [SwaggerOperation(Tags = new[] { "Authentication" })]
         [Route(RouteHelper.RegisterUser)]
+        [AllowAnonymous]
         [HttpPost]
         public async Task<UuidResponse> RegisterUser(RegisterUserRequest request)
         {

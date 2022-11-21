@@ -20,16 +20,14 @@ namespace EuromonBooks.Domain
 
         public async Task<AllBooks> GetAllBooks()
         {
-            var books = await _repo.GetAllBooks();
-            return books;
+            return await _repo.GetAllBooks(); ;
         }
 
         public async Task<AllBooks> GetAllBooksForUser(string userUid)
         {
             await _validator.ValidateAsync<UserUuidValidator>(userUid);
 
-            var users = await _repo.GetAllBooksForUser(userUid);
-            return users;
+            return await _repo.GetAllBooksForUser(userUid);
         }
 
         public async Task AssignBooksToUser(string uUid, IdList bookIds)
