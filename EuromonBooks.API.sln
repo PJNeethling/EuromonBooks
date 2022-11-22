@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Domain.Abstrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Repository", "src\EuromonBooks.Repository\EuromonBooks.Repository.csproj", "{41988C7B-8144-4BD9-9D09-57388D2C3073}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Database.EF", "src\EuromonBooks.Database.EF\EuromonBooks.Database.EF.csproj", "{8D114969-263F-4920-B81A-67594BA39A94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Database", "src\EuromonBooks.Database\EuromonBooks.Database.csproj", "{8D114969-263F-4920-B81A-67594BA39A94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Database.Abstractions", "src\EuromonBooks.Database.Abstractions\EuromonBooks.Database.Abstractions.csproj", "{8B25DF9C-C2D3-427C-B300-023C5A87EABC}"
 EndProject
@@ -31,11 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Domain.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Repository.Tests", "tests\EuromonBooks.Repository.Tests\EuromonBooks.Repository.Tests.csproj", "{FB2A7271-9861-431B-B16D-7076965698AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuromonBooks.TestHelpers", "tests\EuromonBooks.TestHelpers\EuromonBooks.TestHelpers.csproj", "{C862A274-1633-4342-9BB5-DC2FA30730F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.TestHelpers", "tests\EuromonBooks.TestHelpers\EuromonBooks.TestHelpers.csproj", "{C862A274-1633-4342-9BB5-DC2FA30730F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuromonBooks.API.Tests", "tests\EuromonBooks.API.Tests\EuromonBooks.API.Tests.csproj", "{819F6AB8-1ABA-4097-AC36-9F6ED120F518}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.API.Tests", "tests\EuromonBooks.API.Tests\EuromonBooks.API.Tests.csproj", "{819F6AB8-1ABA-4097-AC36-9F6ED120F518}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuromonBooks.Database.Mock.Tests", "tests\EuromonBooks.Database.Mock.Tests\EuromonBooks.Database.Mock.Tests.csproj", "{7A693C89-9AA0-45F3-BE95-0F713F2E55D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuromonBooks.Database.Mock.Tests", "tests\EuromonBooks.Database.Mock.Tests\EuromonBooks.Database.Mock.Tests.csproj", "{7A693C89-9AA0-45F3-BE95-0F713F2E55D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

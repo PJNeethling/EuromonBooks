@@ -1,5 +1,5 @@
 using EuromonBooks.API.Middleware;
-using EuromonBooks.Database.EF;
+using EuromonBooks.Database;
 using EuromonBooks.Domain;
 using EuromonBooks.Repository;
 using Microsoft.AspNetCore.Mvc;

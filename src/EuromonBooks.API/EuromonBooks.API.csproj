@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EuromonBooks.Database.EF\EuromonBooks.Database.EF.csproj" />
+    <ProjectReference Include="..\EuromonBooks.Database\EuromonBooks.Database.csproj" />
     <ProjectReference Include="..\EuromonBooks.Domain\EuromonBooks.Domain.csproj" />
     <ProjectReference Include="..\EuromonBooks.Repository\EuromonBooks.Repository.csproj" />
   </ItemGroup>

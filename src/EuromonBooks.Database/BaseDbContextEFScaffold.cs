@@ -1,7 +1,7 @@
 ﻿using EuromonBooks.Database.Abstractions.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EuromonBooks.Database.Abstractions
+namespace EuromonBooks.Database
 {
     public partial class BaseDbContext : DbContext
     {
