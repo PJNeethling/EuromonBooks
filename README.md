@@ -1,12 +1,13 @@
 # EuromonBooks
  Eurominotor Books Api
 
-Tech used:
-.net Core 6
-EntityFramework
-FluentValidation
-AutoFixture
-XUnit
+Tech used: 
+- .net Core 6 
+- EntityFramework
+- EntityFramework 
+- FluentValidation 
+- AutoFixture 
+- XUnit 
 
 1. Create the network, by running 
       `docker network create core-shared`
