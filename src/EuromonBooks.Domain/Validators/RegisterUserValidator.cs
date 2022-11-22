@@ -12,7 +12,7 @@ namespace EuromonBooks.Domain.Validators
 
             RuleFor(x => x.Email)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage(ValidationMessages.IsInvalid)
+                .NotEmpty().WithMessage(ValidationMessages.IsRequired)
                 .Matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").WithMessage(ValidationMessages.IsInvalid);
         }
     }

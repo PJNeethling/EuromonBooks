@@ -6,17 +6,25 @@ networks:
       name: core-shared
 
 services:
- pj-example-api:
+  euromon-books-api:
     image: euromon-books-api
+    build:
+      context: ..
+      dockerfile: src/EuromonBooks.API/Dockerfile
     ports:
       - 9998:80
       - 9999:443
     environment:
-      - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT_NAME}
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - JWT__JWTKEY=asdv234234^&%&^%&^hjsdfb2%%%
+      - JWT__JWTISSUER=http://localhost:9998/
+      - JWT__JWTAUDIENCE=http://localhost:9998/
+      - DBOPTIONS__DBCONNECTIONSTRING=server=euromon-books-db;database=EuromonBooks;User ID=sa;Password=Passw0rd;MultipleActiveResultSets=true;Encrypt=False
+      - ENCRYPTIONOPTIONS__PASSPHRASE=BWM8DMLALrFH2bL02Cgq
     volumes:
-      - /var/log/euromonbooks:/var/log:rw
+      - ../../logs:/var/log:rw
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-    restart: always
     networks:
       - euromon-books-net
+    restart: always
