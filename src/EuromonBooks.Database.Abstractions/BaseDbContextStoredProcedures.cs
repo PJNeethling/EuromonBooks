@@ -54,7 +54,6 @@ namespace EuromonBooks.Database.Abstractions
                 new SqlParameter("@FirstName", userParams.FirstName),
                 new SqlParameter("@LastName", userParams.LastName),
                 new SqlParameter("@Email", userParams.Email),
-                new SqlParameter("@Number", userParams.Number),
                 new SqlParameter("@Password", userParams.Password ?? (object)DBNull.Value),
                 new SqlParameter("@Passphrase", userParams.PassPhrase),
                 new SqlParameter("@StatusId", userParams.StatusId ?? (object)DBNull.Value)
@@ -87,7 +86,6 @@ namespace EuromonBooks.Database.Abstractions
                 new SqlParameter("@FirstName", userParams.FirstName),
                 new SqlParameter("@LastName", userParams.LastName),
                 new SqlParameter("@Email", userParams.Email ?? (object)DBNull.Value),
-                new SqlParameter("@Number", userParams.Number ?? (object)DBNull.Value),
                 new SqlParameter("@Password", userParams.Password ?? (object)DBNull.Value),
                 new SqlParameter("@Passphrase", userParams.PassPhrase),
             };

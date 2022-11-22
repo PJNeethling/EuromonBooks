@@ -3,7 +3,6 @@ CREATE OR ALTER PROC RegisterUser
 	@FirstName NVARCHAR(100),
 	@LastName NVARCHAR(100),
 	@Email NVARCHAR(100),
-	@Number NVARCHAR(20),
 	@Password NVARCHAR(255),
 	@Passphrase VARCHAR(128)
 AS
@@ -29,12 +28,12 @@ BEGIN
 			MERGE [User] AS tar
 			USING
 			(
-				VALUES (NEWID(), @UserName, @Password, @FirstName, @LastName, @Email, @Number)
-			) src (Uuid, Username, [Password], FirstName, LastName, Email, Number)
+				VALUES (NEWID(), @UserName, @Password, @FirstName, @LastName, @Email)
+			) src (Uuid, Username, [Password], FirstName, LastName, Email)
 			ON tar.Uuid = src.Uuid
 			WHEN NOT MATCHED
-			THEN INSERT (Username, [Password], FirstName, LastName, Email, Number, StatusId)
-					VALUES (ENCRYPTBYPASSPHRASE(@Passphrase, src.Username), src.[Password], ENCRYPTBYPASSPHRASE(@Passphrase, src.FirstName), ENCRYPTBYPASSPHRASE(@Passphrase, src.LastName), ENCRYPTBYPASSPHRASE(@Passphrase, src.Email), ENCRYPTBYPASSPHRASE(@Passphrase, src.Number), 1)
+			THEN INSERT (Username, [Password], FirstName, LastName, Email, StatusId)
+					VALUES (ENCRYPTBYPASSPHRASE(@Passphrase, src.Username), src.[Password], ENCRYPTBYPASSPHRASE(@Passphrase, src.FirstName), ENCRYPTBYPASSPHRASE(@Passphrase, src.LastName), ENCRYPTBYPASSPHRASE(@Passphrase, src.Email), 1)
 			OUTPUT Inserted.Id,Inserted.Uuid INTO @output;
 
 			INSERT INTO UserRole (UserId, RoleId)

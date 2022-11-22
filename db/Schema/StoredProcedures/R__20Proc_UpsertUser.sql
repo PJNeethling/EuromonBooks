@@ -4,7 +4,6 @@ CREATE OR ALTER PROC UpsertUser
 	@FirstName NVARCHAR(100),
 	@LastName NVARCHAR(100),
 	@Email NVARCHAR(100),
-	@Number NVARCHAR(20),
 	@Password NVARCHAR(255),
 	@Passphrase VARCHAR(128),
 	@StatusId INT
@@ -46,14 +45,13 @@ BEGIN
 			MERGE [User] AS tar
 			USING
 			(
-				VALUES (ISNULL(@Uuid, NEWID()), @UserName, @Password, @FirstName, @LastName, @Email, @Number, ISNULL(@StatusId, 0))
-			) src (Uuid, Username, [Password], FirstName, LastName, Email, Number, StatusId)
+				VALUES (ISNULL(@Uuid, NEWID()), @UserName, @Password, @FirstName, @LastName, @Email, ISNULL(@StatusId, 0))
+			) src (Uuid, Username, [Password], FirstName, LastName, Email, StatusId)
 			ON tar.Uuid = src.Uuid
 			WHEN MATCHED AND (tar.Username <> src.Username
 							OR ISNULL(tar.FirstName, '') <> ISNULL(src.FirstName, '')
 							OR ISNULL(tar.LastName, '') <> ISNULL(src.LastName, '')
 							OR tar.Email <> src.Email
-							OR ISNULL(tar.Number, '') <> ISNULL(src.Number, '')
 							OR tar.StatusId <> src.StatusId)
 				THEN UPDATE
 					SET Username = ENCRYPTBYPASSPHRASE(@Passphrase, src.Username),
@@ -61,12 +59,11 @@ BEGIN
 					FirstName = ENCRYPTBYPASSPHRASE(@Passphrase, src.FirstName),
 					LastName = ENCRYPTBYPASSPHRASE(@Passphrase, src.LastName),
 					Email = ENCRYPTBYPASSPHRASE(@Passphrase, src.Email),
-					Number = ENCRYPTBYPASSPHRASE(@Passphrase, src.Number),
 					StatusId = src.StatusId,
 					ModifiedDate = GETUTCDATE()
 			WHEN NOT MATCHED
-			THEN INSERT (Username, [Password], FirstName, LastName, Email, Number, StatusId)
-					VALUES (ENCRYPTBYPASSPHRASE(@Passphrase, src.Username), src.[Password], ENCRYPTBYPASSPHRASE(@Passphrase, src.FirstName), ENCRYPTBYPASSPHRASE(@Passphrase, src.LastName), ENCRYPTBYPASSPHRASE(@Passphrase, src.Email), ENCRYPTBYPASSPHRASE(@Passphrase, src.Number), src.StatusId)
+			THEN INSERT (Username, [Password], FirstName, LastName, Email, StatusId)
+					VALUES (ENCRYPTBYPASSPHRASE(@Passphrase, src.Username), src.[Password], ENCRYPTBYPASSPHRASE(@Passphrase, src.FirstName), ENCRYPTBYPASSPHRASE(@Passphrase, src.LastName), ENCRYPTBYPASSPHRASE(@Passphrase, src.Email), src.StatusId)
 			OUTPUT Inserted.Uuid INTO @output;
 
 		COMMIT

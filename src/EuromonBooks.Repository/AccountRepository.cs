@@ -74,7 +74,6 @@ namespace EuromonBooks.Repository
                     LastName = userDetails.LastName,
                     UserName = userDetails.UserName,
                     Email = userDetails.Email,
-                    Number = userDetails.Number,
                     StatusId = userDetails.StatusId
                 };
 
@@ -101,7 +100,6 @@ namespace EuromonBooks.Repository
                 LastName = userDetails.LastName,
                 Email = userDetails.Email,
                 UserName = userDetails.UserName,
-                Number = userDetails.Number,
                 StatusId = userDetails.StatusId
             };
             parameters.PassPhrase = _options.Passphrase;
@@ -151,8 +149,7 @@ namespace EuromonBooks.Repository
                 FirstName = userDetails.FirstName,
                 LastName = userDetails.LastName,
                 Email = userDetails.Email,
-                UserName = userDetails.UserName,
-                Number = userDetails.Number
+                UserName = userDetails.UserName
             };
             parameters.PassPhrase = _options.Passphrase;
 
