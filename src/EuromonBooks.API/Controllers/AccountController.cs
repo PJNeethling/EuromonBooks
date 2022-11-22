@@ -68,7 +68,6 @@ namespace EuromonBooks.API.Controllers
                 LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.Username,
-                Number = request.Number,
                 Password = request.Password,
                 StatusId = request.StatusId
             };
@@ -93,7 +92,6 @@ namespace EuromonBooks.API.Controllers
                 LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.Username,
-                Number = request.Number,
                 Password = request.Password,
                 StatusId = request.StatusId
             };
@@ -136,7 +134,6 @@ namespace EuromonBooks.API.Controllers
                 LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.UserName,
-                Number = request.Number,
                 Password = request.Password,
             };
             return await _accountService.RegisterUser(input);
