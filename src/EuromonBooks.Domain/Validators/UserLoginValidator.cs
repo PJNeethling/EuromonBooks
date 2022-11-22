@@ -7,7 +7,7 @@ namespace EuromonBooks.Domain.Validators
     {
         public UserLoginValidator()
         {
-            RuleFor(x => x.UserName)
+            RuleFor(x => x.UserNameOrEmail)
                 .NotEmpty().WithMessage(ValidationMessages.IsRequired);
 
             RuleFor(x => x.Password)

@@ -1,8 +1,9 @@
-﻿using EuromonBooks.Database.Abstractions.Models;
+﻿using EuromonBooks.Database.Abstractions;
+using EuromonBooks.Database.Abstractions.Models;
 using EuromonBooks.Database.Abstractions.Queries;
 using Microsoft.EntityFrameworkCore;
 
-namespace EuromonBooks.Database.Abstractions
+namespace EuromonBooks.Database
 {
     public abstract partial class BaseDbContext : IDatabase
     {

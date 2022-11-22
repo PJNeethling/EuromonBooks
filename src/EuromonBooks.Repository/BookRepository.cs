@@ -34,32 +34,6 @@ namespace EuromonBooks.Repository
             }
         }
 
-        private static AllBooks MapsBooks(List<Database.Abstractions.Queries.BooksQuery> books)
-        {
-            var result = new AllBooks { Books = new List<BookWithDates>() };
-
-            if (books[0].Id != null)
-            {
-                //add auto mapper to map the results
-                foreach (var book in books)
-                {
-                    result.Books.Add(new BookWithDates
-                    {
-                        Id = book.Id,
-                        Name = book.Name,
-                        Description = book.Description,
-                        Text = book.Text,
-                        PurchasePrice = book.PurchasePrice,
-                        IsActive = book.IsActive,
-                        CreatedDate = book.CreatedDate,
-                        ModifiedDate = book.ModifiedDate
-                    });
-                }
-            }
-            result.TotalItems = books[0].TotalItems;
-            return result;
-        }
-
         public async Task<AllBooks> GetAllBooksForUser(string userUid)
         {
             try
@@ -108,6 +82,32 @@ namespace EuromonBooks.Repository
             {
                 throw HandleSqlException(ex);
             }
+        }
+
+        private static AllBooks MapsBooks(List<Database.Abstractions.Queries.BooksQuery> books)
+        {
+            var result = new AllBooks { Books = new List<BookWithDates>() };
+
+            if (books[0].Id != null)
+            {
+                //add auto mapper to map the results
+                foreach (var book in books)
+                {
+                    result.Books.Add(new BookWithDates
+                    {
+                        Id = book.Id,
+                        Name = book.Name,
+                        Description = book.Description,
+                        Text = book.Text,
+                        PurchasePrice = book.PurchasePrice,
+                        IsActive = book.IsActive,
+                        CreatedDate = book.CreatedDate,
+                        ModifiedDate = book.ModifiedDate
+                    });
+                }
+            }
+            result.TotalItems = books[0].TotalItems;
+            return result;
         }
     }
 }

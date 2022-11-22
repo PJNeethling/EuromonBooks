@@ -7,7 +7,8 @@ namespace EuromonBooks.Domain.Validators
         public UserUuidValidator()
         {
             RuleFor(x => x)
-                .NotEmpty().WithMessage(ValidationMessages.IsRequired);
+                .NotEmpty().WithMessage(ValidationMessages.IsRequired)
+                .OverridePropertyName("Uuid");
         }
     }
 }

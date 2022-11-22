@@ -1,11 +1,12 @@
-﻿using EuromonBooks.Database.Abstractions.ProcedureParamaters;
+﻿using EuromonBooks.Database.Abstractions;
+using EuromonBooks.Database.Abstractions.ProcedureParamaters;
 using EuromonBooks.Database.Abstractions.Queries;
 using EuromonBooks.Domain.Abstractions.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
-namespace EuromonBooks.Database.Abstractions
+namespace EuromonBooks.Database
 {
     public partial class BaseDbContext : IDatabase
     {
@@ -82,7 +83,7 @@ namespace EuromonBooks.Database.Abstractions
         {
             var parameters = new[]
             {
-                new SqlParameter("@UserName", userParams.UserName),
+                new SqlParameter("@UserName", userParams.Email),
                 new SqlParameter("@FirstName", userParams.FirstName),
                 new SqlParameter("@LastName", userParams.LastName),
                 new SqlParameter("@Email", userParams.Email ?? (object)DBNull.Value),

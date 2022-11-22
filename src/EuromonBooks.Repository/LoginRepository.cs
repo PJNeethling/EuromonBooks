@@ -28,7 +28,7 @@ namespace EuromonBooks.Repository
         {
             try
             {
-                var userDetails = await _database.Login(request.UserName, _options.Passphrase);
+                var userDetails = await _database.Login(request.UserNameOrEmail, _options.Passphrase);
                 var result = new LoginResponse() { Roles = new List<IdResponse>() };
 
                 if (userDetails != null && _password.ComparePassword(request.Password, userDetails.Password))

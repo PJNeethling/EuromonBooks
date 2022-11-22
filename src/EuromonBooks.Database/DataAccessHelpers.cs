@@ -2,7 +2,7 @@
 using Microsoft.Data.SqlClient.Server;
 using System.Data;
 
-namespace EuromonBooks.Database.Abstractions
+namespace EuromonBooks.Database
 {
     public static class DataAccessHelpers
     {

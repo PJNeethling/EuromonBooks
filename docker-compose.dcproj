@@ -7,10 +7,9 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger/index.html</DockerServiceUrl>
     <DockerServiceName>euromon-books-api</DockerServiceName>
-    <DockerComposeBaseFilePath>scripts\docker-compose.local</DockerComposeBaseFilePath>
+    <DockerComposeBaseFilePath>scripts\docker-compose</DockerComposeBaseFilePath>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="scripts\docker-compose.local.yml" />
     <None Include="scripts\docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
