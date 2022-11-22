@@ -82,7 +82,7 @@ namespace EuromonBooks.Database.Abstractions
         {
             var parameters = new[]
             {
-                new SqlParameter("@UserName", userParams.UserName),
+                new SqlParameter("@UserName", userParams.Email),
                 new SqlParameter("@FirstName", userParams.FirstName),
                 new SqlParameter("@LastName", userParams.LastName),
                 new SqlParameter("@Email", userParams.Email ?? (object)DBNull.Value),

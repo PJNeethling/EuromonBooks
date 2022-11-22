@@ -7,11 +7,13 @@ namespace EuromonBooks.Domain.Validators
     {
         public RegisterUserValidator()
         {
-            RuleFor(x => x.UserName)
-                .NotEmpty().WithMessage(ValidationMessages.IsRequired);
-
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage(ValidationMessages.IsRequired);
+
+            RuleFor(x => x.Email)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage(ValidationMessages.IsInvalid)
+                .Matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").WithMessage(ValidationMessages.IsInvalid);
         }
     }
 }
