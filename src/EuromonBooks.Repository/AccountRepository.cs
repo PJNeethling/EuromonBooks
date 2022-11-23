@@ -1,4 +1,5 @@
-﻿using EuromonBooks.Abstractions.Exceptions;
+﻿using AutoMapper;
+using EuromonBooks.Abstractions.Exceptions;
 using EuromonBooks.Abstractions.Models;
 using EuromonBooks.Abstractions.Repositories;
 using EuromonBooks.Database.Abstractions;
@@ -19,12 +20,14 @@ namespace EuromonBooks.Repository
         private readonly IDatabase _database;
         private readonly IPassword _password;
         private readonly EncryptionOptions _options;
+        private readonly IMapper _mapper;
 
-        public AccountRepository(IDatabase database, IPassword password, IOptions<EncryptionOptions> options)
+        public AccountRepository(IDatabase database, IMapper mapper, IPassword password, IOptions<EncryptionOptions> options)
         {
             _database = database;
             _password = password;
             _options = options.Value;
+            _mapper = mapper;
         }
 
         public async Task<AllUsers> GetAllUsers(int? statusId)
@@ -34,22 +37,15 @@ namespace EuromonBooks.Repository
                 var users = await _database.GetAllUsers(statusId, _options.Passphrase);
 
                 var result = new AllUsers { Users = new List<UserWithDates>() };
+                //var result = new AllUsers();
 
                 if (users[0].Uuid != null)
                 {
                     //add auto mapper to map the results
                     foreach (var user in users)
                     {
-                        result.Users.Add(new UserWithDates
-                        {
-                            Uuid = user.Uuid,
-                            FirstName = user.FirstName,
-                            LastName = user.LastName,
-                            Email = user.Email,
-                            StatusId = user.StatusId,
-                            CreatedDate = user.CreatedDate,
-                            ModifiedDate = user.ModifiedDate
-                        });
+                        result.Users.Add(_mapper.Map<UserWithDates>(user));
+
                     }
                 }
                 result.TotalItems = users[0].TotalItems;
@@ -143,14 +139,8 @@ namespace EuromonBooks.Repository
 
         public async Task<UuidResponse> RegisterUser(UserModel userDetails)
         {
-            //add auto mapper to map the request parameters
-            var parameters = new UserParams
-            {
-                FirstName = userDetails.FirstName,
-                LastName = userDetails.LastName,
-                Email = userDetails.Email,
-                UserName = userDetails.UserName
-            };
+            var parameters = _mapper.Map<UserParams>(userDetails);
+
             parameters.PassPhrase = _options.Passphrase;
 
             var password = string.IsNullOrEmpty(userDetails.Password) ? Guid.NewGuid().ToString() : userDetails.Password;
@@ -178,14 +168,9 @@ namespace EuromonBooks.Repository
 
                 if (roles[0].Id != null)
                 {
-                    //add auto mapper to map the results
                     foreach (var role in roles)
                     {
-                        result.Add(new Role
-                        {
-                            Id = role.Id.Value,
-                            Name = role.Name
-                        });
+                        result.Add(_mapper.Map<Role>(role));
                     }
                 }
                 return result;
@@ -206,13 +191,7 @@ namespace EuromonBooks.Repository
 
                 if (roleDetails.Id != 0)
                 {
-                    //add auto mapper to map the results
-                    result.Id = roleDetails.Id.Value;
-                    result.Name = roleDetails.Name;
-                    result.Description = roleDetails.Description;
-                    result.IsActive = roleDetails.IsActive.Value;
-                    result.CreatedDate = roleDetails.CreatedDate.Value;
-                    result.ModifiedDate = roleDetails.ModifiedDate.Value;
+                    result = _mapper.Map<Role>(roleDetails);
                 }
                 return result;
             }

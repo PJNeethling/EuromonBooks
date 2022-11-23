@@ -5,6 +5,7 @@ Tech used:
 - .net Core 6 
 - EntityFramework
 - EntityFramework 
+- Automapper
 - FluentValidation 
 - AutoFixture 
 - XUnit 

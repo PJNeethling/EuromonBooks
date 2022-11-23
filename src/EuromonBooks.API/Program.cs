@@ -24,6 +24,7 @@ AddServices(builder.Services);
 AddRepository(builder.Services);
 AddDatabase(builder.Services);
 AddSwagger(builder.Services);
+AddAutomapper(builder.Services);
 
 var app = builder.Build();
 var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
@@ -133,4 +134,11 @@ void UseSwagger(IApplicationBuilder app, IApiVersionDescriptionProvider provider
                 options.SwaggerEndpoint($"/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
             }
         });
+}
+
+void AddAutomapper(IServiceCollection services)
+{
+    //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+    services.AddAutoMapper(typeof(AccountRepository));
 }
